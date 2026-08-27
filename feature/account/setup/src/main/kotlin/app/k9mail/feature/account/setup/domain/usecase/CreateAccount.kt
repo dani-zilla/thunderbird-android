@@ -1,6 +1,7 @@
 package app.k9mail.feature.account.setup.domain.usecase
 
 import app.k9mail.feature.account.common.domain.entity.Account
+import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.domain.entity.AccountDisplayOptions
 import app.k9mail.feature.account.common.domain.entity.AccountOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
@@ -23,6 +24,7 @@ class CreateAccount(
             authorizationState = accountState.authorizationState?.value,
             specialFolderSettings = accountState.specialFolderSettings,
             options = mapOptions(accountState.displayOptions!!, accountState.syncOptions!!),
+            accountCreationType = accountState.creationType ?: AccountCreationType.NONE,
         )
 
         return accountCreator.createAccount(account)
