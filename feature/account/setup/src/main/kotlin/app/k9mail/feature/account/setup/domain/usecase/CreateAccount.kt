@@ -24,7 +24,7 @@ class CreateAccount(
             authorizationState = accountState.authorizationState?.value,
             specialFolderSettings = accountState.specialFolderSettings,
             options = mapOptions(accountState.displayOptions!!, accountState.syncOptions!!),
-            accountCreationType = accountState.creationType ?: AccountCreationType.NONE,
+            accountCreationType = accountState.accountCreationType ?: AccountCreationType.NONE,
         )
 
         return accountCreator.createAccount(account)

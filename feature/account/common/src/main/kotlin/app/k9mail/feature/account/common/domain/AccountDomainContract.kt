@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.common.domain
 
+import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.domain.entity.AccountDisplayOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
 import app.k9mail.feature.account.common.domain.entity.AccountSyncOptions
@@ -28,6 +29,8 @@ interface AccountDomainContract {
         fun setDisplayOptions(displayOptions: AccountDisplayOptions)
 
         fun setSyncOptions(syncOptions: AccountSyncOptions)
+
+        fun setAccountCreationType(accountCreationType: AccountCreationType)
 
         fun clear()
     }
