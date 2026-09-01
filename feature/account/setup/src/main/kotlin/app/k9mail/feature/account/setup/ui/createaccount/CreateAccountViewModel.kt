@@ -2,6 +2,7 @@ package app.k9mail.feature.account.setup.ui.createaccount
 
 import androidx.lifecycle.viewModelScope
 import app.k9mail.feature.account.common.domain.AccountDomainContract.AccountStateRepository
+import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.ui.WizardConstants
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
 import app.k9mail.feature.account.setup.domain.DomainContract.UseCase.CreateAccount
@@ -33,13 +34,16 @@ class CreateAccountViewModel(
 
         viewModelScope.launch {
             when (val result = createAccount.execute(accountState)) {
-                is AccountCreatorResult.Success -> showSuccess(AccountUuid(result.accountUuid))
+                is AccountCreatorResult.Success -> showSuccess(
+                    AccountUuid(result.accountUuid),
+                    accountState.accountCreationType ?: AccountCreationType.NONE,
+                )
                 is AccountCreatorResult.Error -> showError(result)
             }
         }
     }
 
-    private fun showSuccess(accountUuid: AccountUuid) {
+    private fun showSuccess(accountUuid: AccountUuid, accountCreationType: AccountCreationType) {
         updateState {
             it.copy(
                 isLoading = false,
@@ -49,7 +53,7 @@ class CreateAccountViewModel(
 
         viewModelScope.launch {
             delay(WizardConstants.CONTINUE_NEXT_DELAY)
-            navigateNext(accountUuid)
+            navigateNext(accountUuid, accountCreationType)
         }
     }
 
@@ -73,8 +77,8 @@ class CreateAccountViewModel(
         emitEffect(Effect.NavigateBack)
     }
 
-    private fun navigateNext(accountUuid: AccountUuid) {
+    private fun navigateNext(accountUuid: AccountUuid, accountCreationType: AccountCreationType) {
         viewModelScope.coroutineContext.cancelChildren()
-        emitEffect(Effect.NavigateNext(accountUuid))
+        emitEffect(Effect.NavigateNext(accountUuid, accountCreationType))
     }
 }

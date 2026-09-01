@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.setup.ui.createaccount
 
+import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult.Error
 import app.k9mail.feature.account.setup.domain.entity.AccountUuid
 import net.thunderbird.components.ui.bolt.molecule.LoadingErrorState
@@ -20,7 +21,10 @@ interface CreateAccountContract {
     }
 
     sealed interface Effect {
-        data class NavigateNext(val accountUuid: AccountUuid) : Effect
+        data class NavigateNext(
+            val accountUuid: AccountUuid,
+            val accountCreationType: AccountCreationType,
+        ) : Effect
         data object NavigateBack : Effect
     }
 }
