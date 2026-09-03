@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.ui.AppTitleTopHeader
 import app.k9mail.feature.account.common.ui.WizardNavigationBar
 import app.k9mail.feature.account.common.ui.WizardNavigationBarState
@@ -25,7 +24,7 @@ import net.thunderbird.core.ui.contract.mvi.observe
 
 @Composable
 internal fun CreateAccountScreen(
-    onNext: (AccountUuid, AccountCreationType) -> Unit,
+    onNext: (AccountUuid) -> Unit,
     onBack: () -> Unit,
     viewModel: ViewModel,
     brandNameProvider: BrandNameProvider,
@@ -34,7 +33,7 @@ internal fun CreateAccountScreen(
     val (state, dispatch) = viewModel.observe { effect ->
         when (effect) {
             Effect.NavigateBack -> onBack()
-            is Effect.NavigateNext -> onNext(effect.accountUuid, effect.accountCreationType)
+            is Effect.NavigateNext -> onNext(effect.accountUuid)
         }
     }
 

@@ -3,9 +3,7 @@ package app.k9mail.feature.account.setup.ui.createaccount
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.k9mail.feature.account.common.data.InMemoryAccountStateRepository
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
-import app.k9mail.feature.account.setup.domain.entity.AccountUuid
 import app.k9mail.feature.account.setup.ui.fake.FakeBrandNameProvider
 import net.thunderbird.components.ui.bolt.PreviewWithTheme
 import net.thunderbird.components.ui.bolt.common.annotation.PreviewDevices
@@ -15,7 +13,7 @@ import net.thunderbird.components.ui.bolt.common.annotation.PreviewDevices
 internal fun AccountOptionsScreenK9Preview() {
     PreviewWithTheme {
         CreateAccountScreen(
-            onNext = { _: AccountUuid, _: AccountCreationType -> },
+            onNext = {},
             onBack = {},
             viewModel = viewModel {
                 CreateAccountViewModel(

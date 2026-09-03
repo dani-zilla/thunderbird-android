@@ -8,7 +8,6 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.domain.entity.IncomingProtocolType
 import app.k9mail.feature.account.server.settings.ui.incoming.IncomingServerSettingsScreen
 import app.k9mail.feature.account.server.settings.ui.incoming.IncomingServerSettingsViewModel
@@ -181,8 +180,8 @@ fun AccountSetupNavHost(
 
         composable(route = NESTED_NAVIGATION_CREATE_ACCOUNT) {
             CreateAccountScreen(
-                onNext = { accountUuid: AccountUuid, accountCreationType: AccountCreationType ->
-                    onFinish(AccountSetupRoute.AccountSetup(accountUuid.value, accountCreationType))
+                onNext = { accountUuid: AccountUuid ->
+                    onFinish(AccountSetupRoute.AccountSetup(accountUuid.value))
                 },
                 onBack = { navController.popBackStack() },
                 viewModel = koinViewModel<CreateAccountViewModel>(),

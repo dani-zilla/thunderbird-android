@@ -2,7 +2,6 @@ package net.thunderbird.feature.thundermail.internal.common.ui
 
 import androidx.lifecycle.viewModelScope
 import app.k9mail.autodiscovery.api.AutoDiscoveryResult
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
 import app.k9mail.feature.account.oauth.ui.AccountOAuthViewModel
 import app.k9mail.feature.account.setup.domain.DomainContract.UseCase.GetAutoDiscovery
@@ -96,7 +95,6 @@ internal class ThundermailOAuthViewModel(
                 authorizationState = effect.state,
                 incomingServerSettings = requireNotNull(incomingServerSettings) { errorMessage },
                 outgoingServerSettings = requireNotNull(outgoingServerSettings) { errorMessage },
-                accountCreationType = AccountCreationType.NEW,
             ).handle(
                 onSuccess = { emitEffect(ThundermailContract.Effect.NavigateToIncomingServerSettings) },
                 onFailure = { failure ->

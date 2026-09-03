@@ -1,7 +1,6 @@
 package app.k9mail.feature.account.common.data
 
 import app.k9mail.feature.account.common.domain.AccountDomainContract
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.domain.entity.AccountDisplayOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
 import app.k9mail.feature.account.common.domain.entity.AccountSyncOptions
@@ -61,9 +60,5 @@ class InMemoryAccountStateRepository(
 
     override fun updateAuthorizationState(authorizationState: String?) {
         state = state.copy(authorizationState = AuthorizationState(authorizationState))
-    }
-
-    override fun setAccountCreationType(accountCreationType: AccountCreationType) {
-        state = state.copy(accountCreationType = accountCreationType)
     }
 }

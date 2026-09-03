@@ -11,5 +11,4 @@ data class AccountState(
     val specialFolderSettings: SpecialFolderSettings? = null,
     val displayOptions: AccountDisplayOptions? = null,
     val syncOptions: AccountSyncOptions? = null,
-    val accountCreationType: AccountCreationType? = null,
 )

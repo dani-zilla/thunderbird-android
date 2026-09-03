@@ -1,7 +1,6 @@
 package net.thunderbird.feature.thundermail.internal.common.domain
 
 import app.k9mail.feature.account.common.domain.AccountDomainContract
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.domain.entity.AccountDisplayOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
 import app.k9mail.feature.account.common.domain.entity.AuthorizationState
@@ -17,7 +16,6 @@ internal class CreateAccountStateUseCase(
         authorizationState: AuthorizationState,
         incomingServerSettings: ServerSettings,
         outgoingServerSettings: ServerSettings,
-        accountCreationType: AccountCreationType,
     ): Outcome<Unit, Failure> {
         val json = authorizationState.value ?: return Outcome.failure(Failure.AuthorizationStateMissing)
         val (authState, error) = try {

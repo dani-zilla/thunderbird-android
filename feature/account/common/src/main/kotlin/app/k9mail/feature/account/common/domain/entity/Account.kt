@@ -10,5 +10,4 @@ data class Account(
     val authorizationState: String?,
     val specialFolderSettings: SpecialFolderSettings?,
     val options: AccountOptions,
-    val accountCreationType: AccountCreationType,
 )

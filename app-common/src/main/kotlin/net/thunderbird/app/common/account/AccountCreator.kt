@@ -6,7 +6,6 @@ import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderSettings
 import app.k9mail.feature.account.setup.AccountSetupExternalContract
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import com.fsck.k9.Core
 import com.fsck.k9.Preferences
 import com.fsck.k9.account.DeletePolicyProvider
@@ -97,17 +96,6 @@ internal class AccountCreator(
             newAccount.setSpecialFolders(specialFolderSettings)
         }
 
-        featureFlagProvider.provide(GeneratedFeatureFlagKey.PUSH_ENABLED_ON_INBOX_BY_DEFAULT)
-            .onEnabled {
-                when (account.accountCreationType) {
-                    AccountCreationType.NEW,
-                    AccountCreationType.QR_IMPORT -> {
-                        // TODO Set the push setting here
-                    }
-                    else -> {}
-                }
-            }
-
         newAccount.markSetupFinished()
 
         preferences.saveAccount(newAccount)
@@ -117,6 +105,13 @@ internal class AccountCreator(
         Core.setServicesEnabled(context)
 
         messagingController.refreshFolderListBlocking(newAccount)
+
+        featureFlagProvider.provide(GeneratedFeatureFlagKey.PUSH_ENABLED_ON_INBOX_BY_DEFAULT)
+            .onEnabled {
+                // The AccountCreator is only called when not importing settings.
+                // We can update inbox push here by default.
+                // TODO Get inbox and update
+            }
 
         if (account.options.checkFrequencyInMinutes == -1) {
             messagingController.checkMail(newAccount, false, true, false, null)

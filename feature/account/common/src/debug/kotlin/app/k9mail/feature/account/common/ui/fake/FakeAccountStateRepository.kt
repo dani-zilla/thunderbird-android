@@ -1,7 +1,6 @@
 package app.k9mail.feature.account.common.ui.fake
 
 import app.k9mail.feature.account.common.domain.AccountDomainContract
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import app.k9mail.feature.account.common.domain.entity.AccountDisplayOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
 import app.k9mail.feature.account.common.domain.entity.AccountSyncOptions
@@ -53,8 +52,6 @@ class FakeAccountStateRepository : AccountDomainContract.AccountStateRepository 
     override fun setDisplayOptions(displayOptions: AccountDisplayOptions) = Unit
 
     override fun setSyncOptions(syncOptions: AccountSyncOptions) = Unit
-
-    override fun setAccountCreationType(accountCreationType: AccountCreationType) = Unit
 
     override fun clear() = Unit
 }

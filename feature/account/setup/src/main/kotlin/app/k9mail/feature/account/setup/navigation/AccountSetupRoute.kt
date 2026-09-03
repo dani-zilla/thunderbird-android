@@ -1,16 +1,12 @@
 package app.k9mail.feature.account.setup.navigation
 
-import app.k9mail.feature.account.common.domain.entity.AccountCreationType
 import kotlinx.serialization.Serializable
 import net.thunderbird.core.ui.navigation.Route
 
 sealed interface AccountSetupRoute : Route {
 
     @Serializable
-    data class AccountSetup(
-        val accountId: String? = null,
-        val accountCreationType: AccountCreationType = AccountCreationType.NONE,
-    ) : AccountSetupRoute {
+    data class AccountSetup(val accountId: String? = null) : AccountSetupRoute {
         override val basePath: String = BASE_PATH
 
         override fun route(): String = basePath
