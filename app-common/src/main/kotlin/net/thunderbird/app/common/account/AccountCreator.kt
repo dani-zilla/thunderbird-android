@@ -7,6 +7,9 @@ import app.k9mail.feature.account.common.domain.entity.SpecialFolderSettings
 import app.k9mail.feature.account.setup.AccountSetupExternalContract
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
 import app.k9mail.feature.account.setup.domain.usecase.GetSpecialFolderOptions
+import app.k9mail.legacy.mailstore.MessageStoreManager
+import app.k9mail.legacy.mailstore.domain.GetFolderIdsForTypeUseCase
+import app.k9mail.legacy.mailstore.domain.SetPushForFolderUseCase
 import com.fsck.k9.Core
 import com.fsck.k9.Preferences
 import com.fsck.k9.account.DeletePolicyProvider
@@ -48,6 +51,8 @@ internal class AccountCreator(
     private val avatarMonogramCreator: AvatarMonogramCreator,
     private val unifiedInboxConfigurator: UnifiedInboxConfigurator,
     private val featureFlagProvider: FeatureFlagProvider,
+    private val getFolderIdsForTypeUseCase: GetFolderIdsForTypeUseCase,
+    private val setPushForFolderUseCase: SetPushForFolderUseCase,
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : AccountSetupExternalContract.AccountCreator {
 
@@ -114,19 +119,12 @@ internal class AccountCreator(
         featureFlagProvider.provide(GeneratedFeatureFlagKey.PUSH_ENABLED_ON_INBOX_BY_DEFAULT)
             .onEnabled {
                 // The AccountCreator is only called when not importing settings.
-                // We can update inbox push here by default.
-                // TODO Get Inbox folderDetails, then updateFolderSettings
-                // TODO make a use case for getting a folder's settings by type
-                val inboxFolderID: Long? =
-                    messagingController.getMessageStore(newAccount).getFolders(true) { folderDetails ->
-                        if (folderDetails.type == FolderType.INBOX) {
-                            folderDetails.id
-                        } else {
-                            null
-                        }
-                    }.firstOrNull()
-                if (inboxFolderID != null) {
-                    messagingController.getMessageStore(newAccount).setPushEnabled(inboxFolderID, true)
+                // We can update inbox push here by default, as it's always a new account.
+                getFolderIdsForTypeUseCase(
+                    newAccount.uuid,
+                    FolderType.INBOX
+                ).firstOrNull()?.let { inboxFolderId ->
+                    setPushForFolderUseCase(accountUuid = newAccount.uuid, folderId = inboxFolderId, enabled = true)
                 }
             }
 
