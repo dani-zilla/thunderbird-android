@@ -32,6 +32,10 @@ internal class TbFundingSettings : FundingSettings {
         K9.saveSettingsAsync()
     }
 
+    override fun incrementReminderShownCount() {
+        setReminderShownCount(getReminderShownCount() + 1)
+    }
+
     override fun getActivityCounterInMillis(): Long = K9.fundingActivityCounterInMillis
 
     override fun setActivityCounterInMillis(activeTime: Long) {
