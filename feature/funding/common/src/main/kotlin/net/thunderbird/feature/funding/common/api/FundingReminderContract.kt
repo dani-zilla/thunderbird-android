@@ -4,10 +4,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 
 // 1 week in milliseconds
-const val FUNDING_REMINDER_DELAY_MILLIS = 7 * 24 * 60 * 60 * 1000L
+const val FUNDING_REMINDER_DELAY_MILLIS = 5000L //7 * 24 * 60 * 60 * 1000L
 
 // 30 minutes in milliseconds
-const val FUNDING_REMINDER_MIN_ACTIVITY_MILLIS = 30 * 60 * 1000L
+const val FUNDING_REMINDER_MIN_ACTIVITY_MILLIS = 1000 //30 * 60 * 1000L
 
 interface FundingReminderContract {
 
