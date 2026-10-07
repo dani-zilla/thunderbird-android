@@ -11,6 +11,7 @@ import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.advanced.Ad
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsScreen
 import net.thunderbird.feature.account.settings.impl.ui.readingMail.ReadingMailSettingsScreen
 import net.thunderbird.feature.account.settings.impl.ui.search.SearchSettingsScreen
+import net.thunderbird.feature.account.settings.impl.ui.syncAndNotifications.SyncAndNotificationsScreen
 
 internal class DefaultAccountSettingsNavigation : AccountSettingsNavigation {
 
@@ -45,6 +46,17 @@ internal class DefaultAccountSettingsNavigation : AccountSettingsNavigation {
                     accountId = accountId,
                     onBack = onBack,
                 )
+            }
+        }
+
+        with(navGraphBuilder) {
+            deepLinkComposable<AccountSettingsRoute.SyncAndNotificationSettings>(
+                basePath = AccountSettingsRoute.SyncAndNotificationSettings.BASE_PATH,
+            ) { backStackEntry ->
+                val syncAndNotificationsRoute = backStackEntry.toRoute<AccountSettingsRoute.SyncAndNotificationSettings>()
+                val accountId = AccountIdFactory.of(syncAndNotificationsRoute.accountId)
+
+                SyncAndNotificationsScreen(accountId, onBack = onBack)
             }
         }
 

@@ -29,6 +29,9 @@ import net.thunderbird.feature.account.settings.impl.ui.readingMail.ReadingMailS
 import net.thunderbird.feature.account.settings.impl.ui.search.SearchSettingBuilder
 import net.thunderbird.feature.account.settings.impl.ui.search.SearchSettingsContract
 import net.thunderbird.feature.account.settings.impl.ui.search.SearchSettingsViewModel
+import net.thunderbird.feature.account.settings.impl.ui.syncAndNotifications.SyncAndNotificationSettingsBuilder
+import net.thunderbird.feature.account.settings.impl.ui.syncAndNotifications.SyncAndNotificationSettingsContract
+import net.thunderbird.feature.account.settings.impl.ui.syncAndNotifications.SyncAndNotificationSettingsViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -135,6 +138,18 @@ val featureAccountSettingsModule = module {
 
     factory<SearchSettingsContract.SettingsBuilder> {
         SearchSettingBuilder(
+            resources = get<StringsResourceManager>(),
+        )
+    }
+
+    viewModel { params ->
+        SyncAndNotificationSettingsViewModel(
+            accountId = params.get(),
+        )
+    }
+
+    factory<SyncAndNotificationSettingsContract.SettingsBuilder> {
+        SyncAndNotificationSettingsBuilder(
             resources = get<StringsResourceManager>(),
         )
     }
