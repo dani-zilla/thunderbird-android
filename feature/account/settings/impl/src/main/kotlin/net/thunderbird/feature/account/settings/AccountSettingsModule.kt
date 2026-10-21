@@ -6,6 +6,7 @@ import net.thunderbird.core.common.resources.StringsResourceManager
 import net.thunderbird.feature.account.settings.api.AccountSettingsNavigation
 import net.thunderbird.feature.account.settings.impl.DefaultAccountSettingsNavigation
 import net.thunderbird.feature.account.settings.impl.domain.AccountSettingsDomainContract.UseCase
+import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountFolders
 import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountName
 import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountProfile
 import net.thunderbird.feature.account.settings.impl.domain.usecase.GetLegacyAccount
@@ -97,6 +98,12 @@ val featureAccountSettingsModule = module {
     factory<UseCase.UpdateGeneralSettings> {
         UpdateGeneralSettings(
             repository = get(),
+        )
+    }
+
+    factory<UseCase.GetAccountFolders> {
+        GetAccountFolders(
+            folderRepository = get(),
         )
     }
 
