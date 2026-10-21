@@ -1,5 +1,6 @@
 package net.thunderbird.feature.account.settings.impl.domain
 
+import app.k9mail.legacy.ui.folder.DisplayFolder
 import com.eygraber.uri.Uri
 import kotlinx.coroutines.flow.Flow
 import net.thunderbird.components.core.outcome.Outcome
@@ -72,6 +73,10 @@ internal interface AccountSettingsDomainContract {
 
         fun interface ValidateAvatarMonogram {
             operator fun invoke(monogram: String): Outcome<Unit, ValidateMonogramError>
+        }
+
+        fun interface GetAccountFolders {
+            operator fun invoke(accountId: AccountId): Flow<List<DisplayFolder>>
         }
     }
 
