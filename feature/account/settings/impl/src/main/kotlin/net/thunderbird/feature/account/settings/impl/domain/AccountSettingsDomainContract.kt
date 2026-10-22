@@ -75,7 +75,7 @@ internal interface AccountSettingsDomainContract {
             operator fun invoke(monogram: String): Outcome<Unit, ValidateMonogramError>
         }
 
-        fun interface GetAccountFolders {
+        fun interface GetAccountDisplayFolders {
             operator fun invoke(accountId: AccountId): Flow<List<DisplayFolder>>
         }
     }

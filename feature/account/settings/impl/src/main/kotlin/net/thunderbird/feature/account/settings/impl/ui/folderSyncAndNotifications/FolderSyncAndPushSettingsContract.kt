@@ -1,18 +1,21 @@
 package net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications
 
 import androidx.compose.runtime.Stable
+import app.k9mail.legacy.ui.folder.DisplayFolder
 import net.thunderbird.core.ui.contract.mvi.BaseViewModel
 import net.thunderbird.core.ui.setting.Settings
 
 interface  FolderSyncAndPushSettingsContract {
 
     abstract class ViewModel : BaseViewModel<State, Event, Effect>(
-        initialState = State()
+        initialState = State(
+            folderList = emptyList()
+        )
     )
 
     @Stable
     data class State(
-        val placeholder: Boolean = true
+        val folderList: List<DisplayFolder>
     )
 
     sealed interface Event {

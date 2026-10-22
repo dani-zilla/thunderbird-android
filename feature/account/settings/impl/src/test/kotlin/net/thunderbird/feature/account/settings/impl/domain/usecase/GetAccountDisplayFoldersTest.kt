@@ -14,7 +14,7 @@ import net.thunderbird.feature.mail.folder.FolderType
 import net.thunderbird.feature.mail.folder.api.Folder
 import org.junit.Test
 
-class GetAccountFoldersTest {
+class GetAccountDisplayFoldersTest {
 
     @Test
     fun `should emit folders when present`() = runTest {
@@ -23,8 +23,8 @@ class GetAccountFoldersTest {
         assertThat(folderFlow.first().isNotEmpty())
     }
 
-    private fun createTestUseCase(): AccountSettingsDomainContract.UseCase.GetAccountFolders {
-        return GetAccountFolders(
+    private fun createTestUseCase(): AccountSettingsDomainContract.UseCase.GetAccountDisplayFolders {
+        return GetAccountDisplayFolders(
             folderRepository = FakeDisplayFolderRepository(accountFoldersFlow())
         )
     }
