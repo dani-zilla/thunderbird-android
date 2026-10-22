@@ -38,10 +38,12 @@ dependencies {
     implementation(libs.uri)
 
     implementation(projects.feature.launcher)
+    implementation(projects.feature.mail.folder.api)
 
     debugImplementation(projects.core.ui.setting.implDialog)
 
     testImplementation(projects.core.ui.compose.testing)
+    testImplementation(projects.feature.account.fake)
 }
 
 codeCoverage {
