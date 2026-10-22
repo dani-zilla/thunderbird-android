@@ -6,7 +6,7 @@ import net.thunderbird.core.common.resources.StringsResourceManager
 import net.thunderbird.feature.account.settings.api.AccountSettingsNavigation
 import net.thunderbird.feature.account.settings.impl.DefaultAccountSettingsNavigation
 import net.thunderbird.feature.account.settings.impl.domain.AccountSettingsDomainContract.UseCase
-import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountFolders
+import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountDisplayFolders
 import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountName
 import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountProfile
 import net.thunderbird.feature.account.settings.impl.domain.usecase.GetLegacyAccount
@@ -22,6 +22,7 @@ import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMai
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsContract
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsOptionsMapper
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsViewModel
+import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsViewModel
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsBuilder
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsContract
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsValidator
@@ -101,8 +102,8 @@ val featureAccountSettingsModule = module {
         )
     }
 
-    factory<UseCase.GetAccountFolders> {
-        GetAccountFolders(
+    factory<UseCase.GetAccountDisplayFolders> {
+        GetAccountDisplayFolders(
             folderRepository = get(),
         )
     }
@@ -178,6 +179,14 @@ val featureAccountSettingsModule = module {
         SyncAndNotificationSettingsViewModel(
             accountId = params.get(),
         )
+    }
+
+    viewModel { params ->
+        FolderSyncAndPushSettingsViewModel(
+            getAccountDisplayFolders = get(),
+            accountId = params.get(),
+        )
+
     }
 
     factory<SyncAndNotificationSettingsContract.SettingsBuilder> {

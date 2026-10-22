@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import net.thunderbird.feature.account.AccountId
 import net.thunderbird.feature.account.settings.impl.domain.AccountSettingsDomainContract.UseCase
 
-internal class GetAccountFolders (
+internal class GetAccountDisplayFolders (
     private val folderRepository: DisplayFolderRepository,
-) : UseCase.GetAccountFolders {
+) : UseCase.GetAccountDisplayFolders {
     override fun invoke(accountId: AccountId): Flow<List<DisplayFolder>> {
         return folderRepository.getDisplayFoldersFlow(accountId = accountId, includeHiddenFolders = true)
     }
