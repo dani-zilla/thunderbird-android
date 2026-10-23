@@ -21,7 +21,7 @@ internal fun FolderSyncAndPushSettingsScreen(
         parametersOf(accountId)
     },
     provider: SettingViewProvider = koinInject(),
-    builder: FolderSyncAndPushSettingsBuilder = koinInject(),
+    builder: FolderSyncAndPushSettingsContract.SettingsBuilder = koinInject(),
 ) {
     val (state, dispatch) = viewModel.observe { effect ->
         when (effect) {
@@ -32,6 +32,12 @@ internal fun FolderSyncAndPushSettingsScreen(
     }
     BackHandler(onBack = onBack)
 
-
+    FolderSyncAndPushContent(
+        state = state.value,
+        onEvent = { dispatch(it) },
+        provider = provider,
+        builder = builder,
+        modifier = modifier,
+    )
 
 }

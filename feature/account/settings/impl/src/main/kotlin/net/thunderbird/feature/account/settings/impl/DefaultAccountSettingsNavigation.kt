@@ -8,6 +8,7 @@ import net.thunderbird.feature.account.settings.api.AccountSettingsNavigation
 import net.thunderbird.feature.account.settings.api.AccountSettingsRoute
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsScreen
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.advanced.AdvancedFetchingMailSettingsScreen
+import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsScreen
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsScreen
 import net.thunderbird.feature.account.settings.impl.ui.readingMail.ReadingMailSettingsScreen
 import net.thunderbird.feature.account.settings.impl.ui.search.SearchSettingsScreen
@@ -58,6 +59,17 @@ internal class DefaultAccountSettingsNavigation : AccountSettingsNavigation {
                     backStackEntry.toRoute<AccountSettingsRoute.SyncAndNotificationSettings>()
                 val accountId = AccountIdFactory.of(syncAndNotificationsRoute.accountId)
                 SyncAndNotificationsScreen(accountId, onBack = onBack)
+            }
+        }
+
+        with(navGraphBuilder) {
+            deepLinkComposable<AccountSettingsRoute.FolderSyncAndPushSettings>(
+                basePath = AccountSettingsRoute.FolderSyncAndPushSettings.BASE_PATH,
+            ) { backStackEntry ->
+                val folderSyncAndPushRoute =
+                    backStackEntry.toRoute<AccountSettingsRoute.FolderSyncAndPushSettings>()
+                val accountId = AccountIdFactory.of(folderSyncAndPushRoute.accountId)
+                FolderSyncAndPushSettingsScreen(accountId, onBack = onBack)
             }
         }
 
