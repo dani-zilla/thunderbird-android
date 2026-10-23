@@ -39,6 +39,17 @@ sealed interface AccountSettingsRoute : Route {
     }
 
     @Serializable
+    data class FolderSyncAndPushSettings(val accountId: String) : AccountSettingsRoute {
+        override val basePath: String = BASE_PATH
+
+        override fun route(): String = "$basePath/$accountId"
+
+        companion object {
+            const val BASE_PATH = "$ACCOUNT_SETTINGS_BASE_PATH/folder_sync_and_push"
+        }
+    }
+
+    @Serializable
     data class FetchingMailSettings(val accountId: String) : AccountSettingsRoute {
         override val basePath: String = BASE_PATH
 

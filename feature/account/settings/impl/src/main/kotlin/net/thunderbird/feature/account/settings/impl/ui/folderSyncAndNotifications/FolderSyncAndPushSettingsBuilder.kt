@@ -7,7 +7,7 @@ import net.thunderbird.core.ui.setting.Setting
 import net.thunderbird.core.ui.setting.SettingValue
 import net.thunderbird.core.ui.setting.Settings
 
-class FolderSyncAndPushSettingsBuilder() : FolderSyncAndPushSettingsContract.SettingsBuilder {
+class FolderSyncAndPushSettingsBuilder : FolderSyncAndPushSettingsContract.SettingsBuilder {
     override fun build(
         state: FolderSyncAndPushSettingsContract.State,
         onEvent: (FolderSyncAndPushSettingsContract.Event) -> Unit,

@@ -3,12 +3,12 @@ package net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotificati
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import net.thunderbird.feature.account.AccountId
-import net.thunderbird.feature.account.settings.impl.domain.usecase.GetAccountDisplayFolders
+import net.thunderbird.feature.account.settings.impl.domain.AccountSettingsDomainContract.UseCase
 import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsContract.Effect
 import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsContract.Event
 
 internal class FolderSyncAndPushSettingsViewModel(
-    private val getAccountDisplayFolders: GetAccountDisplayFolders,
+    private val getAccountDisplayFolders: UseCase.GetAccountDisplayFolders,
     private val accountId: AccountId,
 ) : FolderSyncAndPushSettingsContract.ViewModel() {
 

@@ -22,6 +22,8 @@ import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMai
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsContract
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsOptionsMapper
 import net.thunderbird.feature.account.settings.impl.ui.fetchingMail.FetchingMailSettingsViewModel
+import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsBuilder
+import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsContract
 import net.thunderbird.feature.account.settings.impl.ui.folderSyncAndNotifications.FolderSyncAndPushSettingsViewModel
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsBuilder
 import net.thunderbird.feature.account.settings.impl.ui.general.GeneralSettingsContract
@@ -193,6 +195,10 @@ val featureAccountSettingsModule = module {
         SyncAndNotificationSettingsBuilder(
             resources = get<StringsResourceManager>(),
         )
+    }
+
+    factory<FolderSyncAndPushSettingsContract.SettingsBuilder> {
+        FolderSyncAndPushSettingsBuilder()
     }
 
     viewModel { params ->

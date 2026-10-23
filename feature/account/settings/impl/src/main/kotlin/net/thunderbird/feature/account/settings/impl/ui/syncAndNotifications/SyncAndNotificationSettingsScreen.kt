@@ -47,11 +47,11 @@ internal fun SyncAndNotificationsScreen(
             }
 
             is Effect.NavigateToFolderSyncAndPush -> {
-                ManageFoldersActivity.launch(
-                    requireNotNull(activityContext) {
-                        "Can't initialize ManageFoldersActivity. The activityContext was null."
-                    },
-                    accountId,
+                FeatureLauncherActivity.launch(
+                    context = context,
+                    target = FeatureLauncherTarget.FolderSyncAndPushSettings(
+                        accountId = accountId,
+                    )
                 )
             }
 

@@ -42,6 +42,10 @@ sealed class FeatureLauncherTarget(
         deepLinkUri = AccountSettingsRoute.SyncAndNotificationSettings(accountId.toString()).route().toUri(),
     )
 
+    data class FolderSyncAndPushSettings(val accountId: AccountId) : FeatureLauncherTarget(
+        deepLinkUri = AccountSettingsRoute.FolderSyncAndPushSettings(accountId.toString()).route().toUri(),
+    )
+
     data class AccountFetchingMailSettings(val accountId: AccountId) : FeatureLauncherTarget(
         deepLinkUri = AccountSettingsRoute.FetchingMailSettings(accountId.toString()).route().toUri(),
     )
