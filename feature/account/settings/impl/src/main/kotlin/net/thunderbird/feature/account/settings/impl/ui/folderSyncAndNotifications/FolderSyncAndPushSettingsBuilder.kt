@@ -23,13 +23,14 @@ class FolderSyncAndPushSettingsBuilder : FolderSyncAndPushSettingsContract.Setti
         val settings = mutableListOf<Setting>()
 
         for (folder in folders) {
+            val title = folder.folder.name.lowercase().replaceFirstChar { it.titlecase() }
             settings.add(
-                SettingValue.ActionText(
+                SettingValue.SingleLineActionText(
                     id = folder.folder.id.toString(),
-                    title = { folder.folder.name },
+                    title = { title },
                     description = { null },
                     icon = { null },
-                    value = "",
+                    value = title,
                     onClick = { },
                 ),
             )

@@ -13,6 +13,7 @@ import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.ColorItem
 import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.IconListItem
 import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.SegmentedButtonItem
 import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.SelectItem
+import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.SingleLineActionTextItem
 import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.SwitchItem
 import net.thunderbird.core.ui.setting.dialog.ui.components.list.value.TextItem
 
@@ -60,6 +61,13 @@ private fun RenderSettingValue(
 
         is SettingValue.ActionText -> {
             ActionTextItem(
+                setting = setting,
+                modifier = modifier,
+            )
+        }
+
+        is SettingValue.SingleLineActionText -> {
+            SingleLineActionTextItem(
                 setting = setting,
                 modifier = modifier,
             )
