@@ -56,6 +56,7 @@ internal fun SettingDialog(
         is SettingValue.SegmentedButton<*>,
         is SettingValue.Switch,
         is SettingValue.ActionText,
+        is SettingValue.SingleLineActionText,
         -> Unit
     }
 }
